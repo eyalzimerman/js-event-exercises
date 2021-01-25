@@ -1,0 +1,17 @@
+.menu-list ul {
+    display: none;
+}
+
+.title::before {
+    content: '▶ ';
+    cursor: pointer;
+}
+
+.open .title::before {
+    content: '▼ ';
+    cursor: pointer;
+}
+
+.open ul {
+    display: block;
+}
