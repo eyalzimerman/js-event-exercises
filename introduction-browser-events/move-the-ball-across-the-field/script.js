@@ -1,21 +1,26 @@
 const field = document.querySelector('div');
-const page = document.body;
-field.addEventListener('click', getFieldCord);
-page.addEventListener('click', getBodyCord)
-let xBall = 0;
-let yBall = 0;
-let xBody = 0;
-let yBody = 0;
+let ball = document.querySelector('#ball');
+field.addEventListener('click', moveTheBall);
 
-function getBodyCord (event) {
-    xBody = event.clientX;
-    yBody = event.clientY;
-}
+let fieldCord = field.getBoundingClientRect();
 
-function getFieldCord (event) {
-    let xField = event.clientX;
-    let yField = event.clientY;
-    xBall = (xBody - xField);
-    yBall = (yBody - yField);
-    alert(xBall+','+yBall);
-}
+function moveTheBall (event) {
+    
+    let left = event.clientX - fieldCord.left - field.clientLeft - ball.clientWidth / 2;
+    let top = event.clientY - fieldCord.top - field.clientTop - ball.clientHeight / 2;
+    ball.style.left = left + 'px';
+    ball.style.top = top + 'px';
+
+    if (top < 0) {
+        ball.style.top = 0;
+    }
+    if (left < 0) {
+        ball.style.left = 0;
+    }
+    if (event.clientY + ball.clientHeight > field.clientHeight) {
+        ball.style.top = field.clientHeight - ball.clientHeight + 'px';
+    }
+    if (event.clientX + ball.clientWidth > field.clientWidth) {
+        ball.style.left = field.clientWidth - ball.clientWidth + 'px';
+    }
+} 
